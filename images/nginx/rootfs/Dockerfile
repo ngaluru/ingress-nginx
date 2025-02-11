@@ -25,8 +25,9 @@ FROM alpine:3.21
 
 ENV PATH=$PATH:/usr/local/luajit/bin:/usr/local/nginx/sbin:/usr/local/nginx/bin
 
-ENV LUA_PATH="/usr/local/share/luajit-2.1.0-beta3/?.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/lib/lua/?.lua;;"
+ENV LUA_PATH="/usr/local/share/luajit-2.1/?.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/lib/lua/?.lua;/usr/local/lib/lua/?/?.lua;/usr/local/lib/lua/?/?/?.lua;;"
 ENV LUA_CPATH="/usr/local/lib/lua/?/?.so;/usr/local/lib/lua/?.so;;"
+ENV LD_PRELOAD="/usr/local/lib/libmimalloc.so"
 
 COPY --from=builder /usr/local /usr/local
 COPY --from=builder /usr/lib/libopentelemetry* /usr/local/lib
