@@ -32,6 +32,9 @@ export LUA_STREAM_NGX_VERSION=v0.0.15
 # Check for recent changes: https://github.com/openresty/lua-upstream-nginx-module/compare/v0.07...master
 export LUA_UPSTREAM_VERSION=v0.07
 
+# Check for recent changes: https://github.com/openresty/lua-cjson/compare/2.1.0.14...master
+export LUA_CJSON_VERSION=2.1.0.14
+
 # Check for recent changes: https://github.com/openresty/luajit2/compare/v2.1-20240815...v2.1-agentzh
 export LUAJIT_VERSION=v2.1-20240815
 
@@ -170,6 +173,9 @@ get_src 9e59ec13c301c8b2855838b1248def49ef348a3e7563fabef677431706718145 \
 
 get_src adc7781ddaeab9341b82033a6c06b0d190d4c6d1c2dddd46f6965ce9e57a0310 \
         "${GITHUB}/openresty/lua-resty-core/archive/$LUA_RESTY_CORE.tar.gz" "lua-resty-core"
+
+get_src 14cac5c7a4520b33449a1fc961344556b8b6a2a2c6b739b0e46e3002e6e605bc \
+        "${GITHUB}/openresty/lua-cjson/archive/$LUA_CJSON_VERSION.tar.gz" "lua-cjson"
 
 get_src 8cf1a22e0d5b8f35cb0b2e14c58fcb3aa505a8fb6e956817f0cdb1f06593f072 \
         "${GITHUB}/openresty/lua-resty-lrucache/archive/$LUA_RESTY_CACHE.tar.gz" "lua-resty-lrucache"
@@ -331,6 +337,10 @@ make install
 
 export LUA_INCLUDE_DIR=/usr/local/include/luajit-2.1
 ln -s $LUA_INCLUDE_DIR /usr/include/lua5.1
+
+cd "$BUILD_PATH/lua-cjson"
+make all
+make install
 
 cd "$BUILD_PATH/lua-resty-lrucache"
 make install
